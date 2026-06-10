@@ -3,200 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cek Khodam Pendamping | Sistem Deteksi Canggih</title>
+    <title>Selamat Ulang Tahun!</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            background-color: #0b111e;
+            /* Warna background gelap tapi hangat */
+            background-color: #1a151b;
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        .khodam-container {
-            background: rgba(18, 26, 47, 0.8);
-            border: 1px solid #00d2ff;
+        /* Container Form Awal */
+        #formSection {
+            background: rgba(30, 20, 30, 0.8);
+            border: 1px solid #ff758c;
             border-radius: 20px;
             padding: 40px 30px;
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.1);
-            max-width: 500px;
-            width: 90%;
+            box-shadow: 0 0 30px rgba(255, 117, 140, 0.2);
             text-align: center;
-            position: relative;
+            max-width: 400px;
+            width: 90%;
+            transition: all 0.5s ease;
         }
 
-        .title-glitch {
-            font-family: 'Share Tech Mono', monospace;
-            color: #00d2ff;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        /* Container Ucapan (Awalnya Disembunyikan) */
+        #greetingSection {
+            display: none;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 2s ease-in-out;
         }
 
-        .subtitle {
-            color: #a0aabf;
-            font-size: 0.9rem;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .title-estetik {
+            font-family: 'Dancing Script', cursive;
+            color: #ff758c;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 117, 140, 0.5);
+        }
+
+        .pesan-baik {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #f8d7da;
             margin-bottom: 30px;
         }
 
         .form-control {
-            background-color: #05080f;
-            border: 1px solid #3a4b70;
+            background-color: #2a1b24;
+            border: 1px solid #ff758c;
             color: #fff;
-            padding: 15px;
+            padding: 12px;
             border-radius: 10px;
             text-align: center;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
 
         .form-control:focus {
-            background-color: #05080f;
+            background-color: #2a1b24;
             color: #fff;
-            border-color: #00d2ff;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            border-color: #ff7ec7;
+            box-shadow: 0 0 15px rgba(255, 126, 199, 0.3);
         }
 
-        .btn-scan {
-            background-color: #00d2ff;
-            color: #000;
-            font-weight: 700;
-            font-size: 1.1rem;
+        .btn-custom {
+            background: linear-gradient(45deg, #ff758c, #ff7ec7);
+            color: #fff;
+            font-weight: 600;
             border: none;
             border-radius: 10px;
             padding: 12px 30px;
-            margin-top: 20px;
             width: 100%;
             transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .btn-scan:hover {
-            background-color: #fff;
-            color: #000;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+        .btn-custom:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 117, 140, 0.6);
+            color: #fff;
         }
 
-        /* Area Hasil Analisis */
-        #resultArea {
-            display: none;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px dashed #3a4b70;
-        }
-
-        .loading-text {
-            font-family: 'Share Tech Mono', monospace;
-            color: #00d2ff;
-            font-size: 1.2rem;
-            animation: pulse 1s infinite;
-        }
-
-        .khodam-name {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ff0055; /* Warna kontras buat nama khodam */
-            text-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
-            margin: 15px 0;
-            text-transform: uppercase;
-        }
-
-        .khodam-desc {
-            color: #a0aabf;
-            font-size: 0.95rem;
-            font-style: italic;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
+        /* Hiasan kecil */
+        .sparkle {
+            color: #ffcc00;
+            font-size: 1.5rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="khodam-container">
-        <h1 class="title-glitch">CEK KHODAM</h1>
-        <p class="subtitle">Sistem Deteksi Entitas Gaib Berbasis AI (Akal-akalan Ilusi)</p>
+    <audio id="bgMusic" loop>
+        <source src="lagu-sweet.mp3" type="audio/mpeg">
+    </audio>
 
-        <div class="input-group-custom">
-            <input type="text" id="namaInput" class="form-control" placeholder="Masukkan Nama Lengkapmu..." autocomplete="off">
-            <button class="btn-scan" onclick="cekKhodam()">Analisis Sekarang</button>
-        </div>
+    <div id="formSection">
+        <h2 class="mb-4" style="font-weight: 600; color: #ff758c;">Ada Kejutan Nih!</h2>
+        <p class="text-muted" style="font-size: 0.9rem;">Ketik namamu di bawah untuk membuka hadiahnya ya.</p>
+        <input type="text" id="namaInput" class="form-control" placeholder="Nama Panggilanmu..." autocomplete="off">
+        <button class="btn-custom" onclick="bukaUcapan()">Buka Kejutan 🎁</button>
+    </div>
 
-        <div id="resultArea">
-            <div id="loading" class="loading-text">Menyinkronkan gelombang aura...</div>
-            <div id="khodamResult" style="display: none;">
-                <p class="text-white mb-1">Entitas yang mendampingi saudara <strong id="namaUser" class="text-info"></strong> adalah:</p>
-                <div class="khodam-name" id="namaKhodam"></div>
-                <p class="khodam-desc" id="descKhodam"></p>
-                <button class="btn btn-outline-info btn-sm mt-3" onclick="resetForm()">Cek Nama Lain</button>
-            </div>
+    <div id="greetingSection">
+        <div class="sparkle">✨ 🎉 ✨</div>
+        <h1 class="title-estetik">Happy Birthday, <br><span id="namaTampil"></span>!</h1>
+        <div class="pesan-baik">
+            <p>Selamat bertambah usia! Semoga di lembaran baru ini, kamu selalu dikelilingi oleh kebahagiaan, kesehatan, dan orang-orang yang sayang sama kamu.</p>
+            <p>Semua doa terbaik mengiringi setiap langkahmu. Jangan pernah menyerah sama mimpimu, tetep jadi versi terbaik dari dirimu sendiri. <i>You totally deserve all the best things in the world!</i></p>
         </div>
+        <button class="btn btn-outline-light btn-sm mt-3" style="border-radius: 20px;" onclick="location.reload()">Ulangi</button>
     </div>
 
     <script>
-        // Database Khodam Absurd (Lu bisa tambahin sendiri di sini)
-        const dataKhodam = [
-            { nama: "Macan Handil Bakti", desc: "Sangat ganas jika lapar, namun sering mengantuk saat nugas." },
-            { nama: "Motherboard Konslet", desc: "Suka mengeluarkan percikan ide, tapi rawan nge-hang kalau kebanyakan mikir." },
-            { nama: "Sekretaris KPU FTI", desc: "Aura kepemimpinan yang kuat, ahli dalam menyusun proposal, tapi sering keteteran di hari H." },
-            { nama: "Naga Ngesot", desc: "Kuat dan berwibawa, sayangnya mageran dan lebih suka rebahan." },
-            { nama: "Supra Bapak", desc: "Memiliki getaran mesin yang mistis, melambangkan ketahanan banting seorang anak rantau." },
-            { nama: "Rice Cooker Lupa Dicolok", desc: "Menebarkan aura PHP (Pemberi Harapan Palsu) yang sangat menyakitkan." },
-            { nama: "Kucing Oren Kosan", desc: "Sifatnya bar-bar, tak kenal takut, pemakan segala lauk sisa." },
-            { nama: "Flashdisk Isi Virus", desc: "Terlihat sangat membantu di luar, namun menghancurkan segalanya dari dalam." },
-            { nama: "Kalkulator Warteg", desc: "Sangat akurat dalam menghitung pengeluaran akhir bulan." },
-            { nama: "Kipas Angin Cosmos", desc: "Membawa kesejukan, tapi sering geleng-geleng kepala melihat tingkah lakumu." }
-        ];
-
-        function cekKhodam() {
-            const inputName = document.getElementById('namaInput').value.trim();
-            const resultArea = document.getElementById('resultArea');
-            const loading = document.getElementById('loading');
-            const khodamResult = document.getElementById('khodamResult');
-
-            if (inputName === "") {
-                alert("Isi namamu dulu, bree! Khodamnya bingung mau nyari siapa.");
+        function bukaUcapan() {
+            const nama = document.getElementById('namaInput').value.trim();
+            
+            if (nama === "") {
+                alert("Eh, diisi dulu dong namanya! 😅");
                 return;
             }
 
-            // Tampilkan area hasil dan loading
-            resultArea.style.display = 'block';
-            loading.style.display = 'block';
-            khodamResult.style.display = 'none';
+            // Memasukkan nama ke dalam teks ucapan
+            document.getElementById('namaTampil').innerText = nama;
 
-            // Animasi pura-pura loading selama 2 detik
-            setTimeout(() => {
-                // Pilih khodam acak dari array
-                const randomMistik = Math.floor(Math.random() * dataKhodam.length);
-                const khodamTerpilih = dataKhodam[randomMistik];
+            // Menghilangkan form dan memunculkan ucapan
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('greetingSection').style.display = 'block';
 
-                // Tampilkan data ke HTML
-                document.getElementById('namaUser').innerText = inputName;
-                document.getElementById('namaKhodam').innerText = khodamTerpilih.nama;
-                document.getElementById('descKhodam').innerText = '"' + khodamTerpilih.desc + '"';
-
-                // Hilangkan loading, munculkan hasil
-                loading.style.display = 'none';
-                khodamResult.style.display = 'block';
-            }, 2000);
-        }
-
-        function resetForm() {
-            document.getElementById('namaInput').value = "";
-            document.getElementById('resultArea').style.display = 'none';
+            // Memutar musik
+            const lagu = document.getElementById('bgMusic');
+            lagu.play().catch(error => {
+                console.log("Autoplay ditolak oleh browser. User harus berinteraksi dulu.");
+            });
         }
     </script>
 
