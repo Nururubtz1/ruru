@@ -3,69 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Ulang Tahun!</title>
+    <title>Spesial Untukmu ✨</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            /* Warna background gelap tapi hangat */
-            background-color: #1a151b;
+            background-color: #141115;
             color: #ffffff;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            padding: 20px 0;
         }
 
-        /* Container Form Awal */
+        /* Tampilan Form Awal */
         #formSection {
-            background: rgba(30, 20, 30, 0.8);
+            background: rgba(28, 22, 30, 0.85);
             border: 1px solid #ff758c;
             border-radius: 20px;
             padding: 40px 30px;
-            box-shadow: 0 0 30px rgba(255, 117, 140, 0.2);
+            box-shadow: 0 0 35px rgba(255, 117, 140, 0.25);
             text-align: center;
-            max-width: 400px;
+            max-width: 420px;
             width: 90%;
             transition: all 0.5s ease;
         }
 
-        /* Container Ucapan (Awalnya Disembunyikan) */
-        #greetingSection {
+        /* Tampilan Konten Utama */
+        #mainContent {
             display: none;
-            text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             width: 90%;
-            animation: fadeIn 2s ease-in-out;
+            text-align: center;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .title-estetik {
+        .title-birthday {
             font-family: 'Dancing Script', cursive;
             color: #ff758c;
             font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(255, 117, 140, 0.5);
+            text-shadow: 0 0 15px rgba(255, 117, 140, 0.4);
+            margin-bottom: 25px;
         }
 
-        .pesan-baik {
-            font-size: 1.1rem;
+        /* Desain Amplop/Tombol Surat */
+        .envelope-btn {
+            background: rgba(255, 117, 140, 0.1);
+            border: 1px solid #ff758c;
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .envelope-btn:hover {
+            background: linear-gradient(45deg, #ff758c, #ff7ec7);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+        }
+
+        .envelope-btn.opened {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #5c535e;
+            color: #a0aabf;
+        }
+
+        /* Kotak Tempat Isi Surat Muncul */
+        #letterBox {
+            display: none;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid #ff758c;
+            border-radius: 4px 15px 15px 4px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: left;
             line-height: 1.8;
-            color: #f8d7da;
-            margin-bottom: 30px;
+            font-size: 1.05rem;
+            color: #f3e8ee;
+            animation: slideDown 0.5s ease-in-out;
         }
 
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form Styling */
         .form-control {
-            background-color: #2a1b24;
+            background-color: #251c27;
             border: 1px solid #ff758c;
             color: #fff;
             padding: 12px;
@@ -75,13 +113,13 @@
         }
 
         .form-control:focus {
-            background-color: #2a1b24;
+            background-color: #251c27;
             color: #fff;
             border-color: #ff7ec7;
             box-shadow: 0 0 15px rgba(255, 126, 199, 0.3);
         }
 
-        .btn-custom {
+        .btn-submit {
             background: linear-gradient(45deg, #ff758c, #ff7ec7);
             color: #fff;
             font-weight: 600;
@@ -92,16 +130,8 @@
             transition: all 0.3s ease;
         }
 
-        .btn-custom:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 117, 140, 0.6);
-            color: #fff;
-        }
-
-        /* Hiasan kecil */
-        .sparkle {
-            color: #ffcc00;
-            font-size: 1.5rem;
+        .btn-submit:hover {
+            box-shadow: 0 0 20px rgba(255, 117, 140, 0.5);
         }
     </style>
 </head>
@@ -112,45 +142,92 @@
     </audio>
 
     <div id="formSection">
-        <h2 class="mb-4" style="font-weight: 600; color: #ff758c;">Ada Kejutan Nih!</h2>
-        <p class="text-muted" style="font-size: 0.9rem;">Ketik namamu di bawah untuk membuka hadiahnya ya.</p>
-        <input type="text" id="namaInput" class="form-control" placeholder="Nama Panggilanmu..." autocomplete="off">
-        <button class="btn-custom" onclick="bukaUcapan()">Buka Kejutan 🎁</button>
+        <h2 class="mb-4" style="font-weight: 600; color: #ff758c;">Sesuatu Untukmu 🎁</h2>
+        <input type="text" id="namaInput" class="form-control" placeholder="Tulis namamu di sini..." autocomplete="off">
+        <button class="btn-submit" onclick="bukaKejutan()">Buka Kejutan ✨</button>
     </div>
 
-    <div id="greetingSection">
-        <div class="sparkle">✨ 🎉 ✨</div>
-        <h1 class="title-estetik">Happy Birthday, <br><span id="namaTampil"></span>!</h1>
-        <div class="pesan-baik">
-            <p>Selamat bertambah usia! Semoga di lembaran baru ini, kamu selalu dikelilingi oleh kebahagiaan, kesehatan, dan orang-orang yang sayang sama kamu.</p>
-            <p>Semua doa terbaik mengiringi setiap langkahmu. Jangan pernah menyerah sama mimpimu, tetep jadi versi terbaik dari dirimu sendiri. <i>You totally deserve all the best things in the world!</i></p>
+    <div id="mainContent">
+        <h1 class="title-birthday">Happy Birthday, <span id="namaTampil"></span>! 🎉</h1>
+        <p class="text-muted mb-4">Ada tiga pucuk surat rahasia yang ditulis khusus hari ini. Klik untuk membaca:</p>
+        
+        <div class="row px-3">
+            <div class="col-md-4">
+                <button class="envelope-btn" id="btn1" onclick="bukaSurat(1)">📩 Surat Pertama</button>
+            </div>
+            <div class="col-md-4">
+                <button class="envelope-btn" id="btn2" onclick="bukaSurat(2)">📩 Surat Kedua</button>
+            </div>
+            <div class="col-md-4">
+                <button class="envelope-btn" id="btn3" onclick="bukaSurat(3)">📩 Surat Ketiga</button>
+            </div>
         </div>
-        <button class="btn btn-outline-light btn-sm mt-3" style="border-radius: 20px;" onclick="location.reload()">Ulangi</button>
+
+        <div id="letterBox"></div>
+
+        <button class="btn btn-outline-secondary btn-sm mt-5" style="border-radius: 20px;" onclick="location.reload()">Ulangi & Acak Kata</button>
     </div>
 
     <script>
-        function bukaUcapan() {
+        // Kumpulan Variasi Ucapan (Pool Kata-kata Random)
+        const poolSurat1 = [
+            "Hari ini bukan cuma tentang bertambahnya angka, tapi tentang merayakan betapa hebatnya kamu bertahan dan tumbuh sampai detik ini. Dunia beruntung punya orang sehangat kamu.",
+            "Selamat hari menetas! Di hari spesial ini, luangkan waktu sejenak buat berterima kasih sama diri kamu sendiri karena udah berjuang melewati banyak hari-hari yang nggak mudah ya.",
+            "Selamat ulang tahun! Hari ini waktu yang pas buat ngingetin kalau kehadiran kamu di dunia ini membawa banyak arti dan senyuman buat orang-orang di sekitarmu, termasuk aku."
+        ];
+
+        const poolSurat2 = [
+            "Harapanku nggak muluk-muluk, semoga di babak baru usiamu ini, langkahmu selalu dipermudah, pundakmu dikuatkan, dan hatimu selalu dijaga agar tetap tenang menghadapi apapun.",
+            "Semoga tahun ini membawa lebih banyak tawa daripada air mata, lebih banyak kesempatan baik, dan didekatkan dengan orang-orang tulus yang menghargai keberadaanmu.",
+            "Doa terbaik mengiringi setiap mimpimu. Semoga rasa lelahmu berbuah manis, kesehatan selalu menyertaimu, dan kebahagiaan sederhana selalu datang di waktu yang tepat."
+        ];
+
+        const poolSurat3 = [
+            "Satu hal yang perlu kamu ingat: Kamu berharga, kamu cukup, dan kamu luar biasa dengan caramu sendiri. Jangan pernah ragu sama potensi dirimu. *You totally deserve all the best things!*",
+            "Terima kasih ya sudah tumbuh jadi orang baik. Tetaplah jadi versi terbaik dari dirimu sendiri. Jangan lupa bahagia hari ini, karena hari ini adalah harimu!",
+            "Apapun yang sedang kamu kejar sekarang, semoga semesta mendukungmu. Nikmati prosesnya, jaga kesehatan, dan selamat merayakan hari kelahiran dengan penuh suka cita!"
+        ];
+
+        // Variabel untuk menyimpan teks yang terpilih setelah diacak
+        let suratTerpilih = { 1: "", 2: "", 3: "" };
+
+        function bukaKejutan() {
             const nama = document.getElementById('namaInput').value.trim();
-            
             if (nama === "") {
-                alert("Eh, diisi dulu dong namanya! 😅");
+                alert("Namanya diisi dulu dong, bre! 😅");
                 return;
             }
 
-            // Memasukkan nama ke dalam teks ucapan
+            // Set nama ke tampilan
             document.getElementById('namaTampil').innerText = nama;
 
-            // Menghilangkan form dan memunculkan ucapan
-            document.getElementById('formSection').style.display = 'none';
-            document.getElementById('greetingSection').style.display = 'block';
+            // Proses Pengacakan Teks (Randomizer)
+            suratTerpilih[1] = poolSurat1[Math.floor(Math.random() * poolSurat1.length)];
+            suratTerpilih[2] = poolSurat2[Math.floor(Math.random() * poolSurat2.length)];
+            suratTerpilih[3] = poolSurat3[Math.floor(Math.random() * poolSurat3.length)];
 
-            // Memutar musik
+            // Transisi Halaman
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+
+            // Mainkan Lagu
             const lagu = document.getElementById('bgMusic');
-            lagu.play().catch(error => {
-                console.log("Autoplay ditolak oleh browser. User harus berinteraksi dulu.");
-            });
+            lagu.play().catch(err => console.log("Autoplay dicegah browser, musik jalan setelah interaksi klik."));
+        }
+
+        function bukaSurat(nomorSurat) {
+            const letterBox = document.getElementById('letterBox');
+            
+            // Masukkan teks yang sudah diacak sebelumnya berdasarkan nomor tombol
+            letterBox.innerHTML = suratTerpilih[nomorSurat];
+            
+            // Munculkan kotak surat dengan animasi smooth
+            letterBox.style.display = 'block';
+
+            // Tandai tombol sebagai 'sudah dibuka' (perubahan visual abu-abu)
+            document.getElementById(`btn${nomorSurat}`).classList.add('opened');
+            document.getElementById(`btn${nomorSurat}`).innerHTML = `📂 Surat Ke-${nomorSurat} (Terbuka)`;
         }
     </script>
-
 </body>
 </html>
