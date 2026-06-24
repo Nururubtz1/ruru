@@ -1,233 +1,211 @@
+<?php
+// Database Destinasi Wisata
+$destinasi = [
+    "alam" => [
+        "nama" => "Pulau Bakut & Jembatan Barito",
+        "desc" => "Menikmati senja di pinggiran sungai Barito sambil melihat jembatan ikonik dan hutan mangrove yang tenang. Cocok buat ngelepas penat setelah nugas seharian.",
+        "img" => "https://img.antaranews.com/cache/730x487/2020/07/21/IMG-20200721-WA0017_1.jpg?auto=format&fit=crop&w=800&q=80", // Gambar ilustrasi alam sungai/jembatan
+        "tips" => "Datang jam 4 sore biar dapet golden hour."
+    ],
+    "kuliner" => [
+        "nama" => "Siring Menara Pandang & Pasar Terapung",
+        "desc" => "Pusat keramaian kota. Kamu bisa nyari jajanan tradisional, naik kelotok, atau sekadar jalan-jalan santai sambil menikmati suasana pinggir sungai Martapura.",
+        "img" => "https://zjglidcehtsqqqhbdxyp.supabase.co/storage/v1/object/public/atourin/images/wilayah/banjarmasin-1638809137.png?x-image-process=image/resize,p_100,limit_1/imageslim?auto=format&fit=crop&w=800&q=80", // Gambar ilustrasi kuliner lokal
+        "tips" => "Paling asyik ke sini Minggu pagi, atau malam Minggu untuk cari makan."
+    ],
+    "nongkrong" => [
+        "nama" => "Cafe Hopping Area Kayu Tangi",
+        "desc" => "Cari suasana baru buat nugas atau mabar? Banyak cafe tersembunyi dengan kopi enak dan Wi-Fi kencang di sekitar sini yang pas buat mahasiswa rantau.",
+        "img" => "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80", // Gambar ilustrasi cafe
+        "tips" => "Siapkan dompet dan pastikan colokan aman."
+    ],
+    "petualang" => [
+        "nama" => "Bukit Matang Kaladan",
+        "desc" => "Butuh effort lebih buat naik, tapi pemandangan gugusan pulau kecil di waduk Riam Kanan dari atas bukit ini bakal bikin semua beban revisi skripsi hilang.",
+        "img" => "https://zjglidcehtsqqqhbdxyp.supabase.co/storage/v1/object/public/atourin/images/destination/banjar/bukit-matang-kaladan-profile1639498827.jpeg?x-image-process=image/resize,p_100,limit_1/imageslim?auto=format&fit=crop&w=800&q=80", // Gambar ilustrasi perbukitan
+        "tips" => "Bawa air minum yang banyak dan berangkat pagi-pagi!"
+    ]
+];
+
+$hasil = null;
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["vibe"])) {
+    $pilihan_vibe = $_POST["vibe"];
+    if (array_key_exists($pilihan_vibe, $destinasi)) {
+        $hasil = $destinasi[$pilihan_vibe];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spesial Untukmu ✨</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <title>Healing Anak Rantau Guide</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #141115;
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 0;
+            padding-top: 40px;
+            padding-bottom: 40px;
         }
-
-        /* Tampilan Form Awal */
-        #formSection {
-            background: rgba(28, 22, 30, 0.85);
-            border: 1px solid #ff758c;
-            border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 0 0 35px rgba(255, 117, 140, 0.25);
+        .header-section {
             text-align: center;
-            max-width: 420px;
-            width: 90%;
-            transition: all 0.5s ease;
+            margin-bottom: 40px;
         }
-
-        /* Tampilan Konten Utama */
-        #mainContent {
-            display: none;
-            max-width: 650px;
-            width: 90%;
-            text-align: center;
+        .header-title {
+            font-weight: 800;
+            color: #198754;
+            letter-spacing: -1px;
         }
-
-        .title-birthday {
-            font-family: 'Dancing Script', cursive;
-            color: #ff758c;
-            font-size: 3.5rem;
-            text-shadow: 0 0 15px rgba(255, 117, 140, 0.4);
-            margin-bottom: 25px;
-        }
-
-        /* Desain Amplop/Tombol Surat */
-        .envelope-btn {
-            background: rgba(255, 117, 140, 0.1);
-            border: 1px solid #ff758c;
-            color: #fff;
-            padding: 15px 20px;
-            border-radius: 12px;
-            font-weight: 500;
-            font-size: 0.95rem;
+        .vibe-card {
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .vibe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: #198754;
+        }
+        .vibe-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .result-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            background: white;
+            animation: slideUp 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .result-img {
             width: 100%;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            height: 300px;
+            object-fit: cover;
         }
-
-        .envelope-btn:hover {
-            background: linear-gradient(45deg, #ff758c, #ff7ec7);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
+        .result-body {
+            padding: 30px;
         }
-
-        .envelope-btn.opened {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: #5c535e;
-            color: #a0aabf;
+        .badge-tips {
+            background-color: #ffc107;
+            color: #000;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
         }
-
-        /* Kotak Tempat Isi Surat Muncul */
-        #letterBox {
-            display: none;
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 3px solid #ff758c;
-            border-radius: 4px 15px 15px 4px;
-            padding: 25px;
-            margin-top: 30px;
-            text-align: left;
-            line-height: 1.8;
-            font-size: 1.05rem;
-            color: #f3e8ee;
-            animation: slideDown 0.5s ease-in-out;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
+        @keyframes slideUp {
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Form Styling */
-        .form-control {
-            background-color: #251c27;
-            border: 1px solid #ff758c;
-            color: #fff;
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 20px;
+        /* Hide radio buttons securely */
+        .vibe-radio {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
         }
-
-        .form-control:focus {
-            background-color: #251c27;
-            color: #fff;
-            border-color: #ff7ec7;
-            box-shadow: 0 0 15px rgba(255, 126, 199, 0.3);
+        /* Style when radio is checked */
+        .vibe-radio:checked + .vibe-card {
+            border-color: #198754;
+            background-color: #e8f5e9;
         }
-
-        .btn-submit {
-            background: linear-gradient(45deg, #ff758c, #ff7ec7);
-            color: #fff;
+        .btn-cari {
+            border-radius: 30px;
+            padding: 12px 40px;
             font-weight: 600;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 30px;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            box-shadow: 0 0 20px rgba(255, 117, 140, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop>
-        <source src="lagu-sweet.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="formSection">
-        <h2 class="mb-4" style="font-weight: 600; color: #ff758c;">Sesuatu Untukmu 🎁</h2>
-        <input type="text" id="namaInput" class="form-control" placeholder="Tulis namamu di sini..." autocomplete="off">
-        <button class="btn-submit" onclick="bukaKejutan()">Buka Kejutan ✨</button>
+<div class="container">
+    <div class="header-section">
+        <h1 class="header-title">🎒 Healing Anak Rantau</h1>
+        <p class="text-muted fs-5">Pusing mikirin kodingan dan deadline tugas? Pilih <i>vibe</i> kamu hari ini, kami kasih rekomendasinya!</p>
     </div>
 
-    <div id="mainContent">
-        <h1 class="title-birthday">Happy Birthday, <span id="namaTampil"></span>! 🎉</h1>
-        <p class="text-muted mb-4">Ada tiga pucuk surat rahasia yang ditulis khusus hari ini. Klik untuk membaca:</p>
-        
-        <div class="row px-3">
-            <div class="col-md-4">
-                <button class="envelope-btn" id="btn1" onclick="bukaSurat(1)">📩 Surat Pertama</button>
+    <form method="POST" action="#hasil" class="mb-5">
+        <div class="row g-4 justify-content-center mb-4">
+            <div class="col-6 col-md-3">
+                <label class="w-100 h-100">
+                    <input type="radio" name="vibe" value="alam" class="vibe-radio" required>
+                    <div class="card vibe-card h-100 text-center p-3">
+                        <div class="vibe-icon">🌿</div>
+                        <h5 class="fw-bold mb-0">Cari Ketenangan</h5>
+                    </div>
+                </label>
             </div>
-            <div class="col-md-4">
-                <button class="envelope-btn" id="btn2" onclick="bukaSurat(2)">📩 Surat Kedua</button>
+            
+            <div class="col-6 col-md-3">
+                <label class="w-100 h-100">
+                    <input type="radio" name="vibe" value="kuliner" class="vibe-radio">
+                    <div class="card vibe-card h-100 text-center p-3">
+                        <div class="vibe-icon">🍜</div>
+                        <h5 class="fw-bold mb-0">Wisata Perut</h5>
+                    </div>
+                </label>
             </div>
-            <div class="col-md-4">
-                <button class="envelope-btn" id="btn3" onclick="bukaSurat(3)">📩 Surat Ketiga</button>
+
+            <div class="col-6 col-md-3">
+                <label class="w-100 h-100">
+                    <input type="radio" name="vibe" value="nongkrong" class="vibe-radio">
+                    <div class="card vibe-card h-100 text-center p-3">
+                        <div class="vibe-icon">☕</div>
+                        <h5 class="fw-bold mb-0">Nugas & Ngopi</h5>
+                    </div>
+                </label>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <label class="w-100 h-100">
+                    <input type="radio" name="vibe" value="petualang" class="vibe-radio">
+                    <div class="card vibe-card h-100 text-center p-3">
+                        <div class="vibe-icon">⛰️</div>
+                        <h5 class="fw-bold mb-0">Mendaki Ringan</h5>
+                    </div>
+                </label>
             </div>
         </div>
 
-        <div id="letterBox"></div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg btn-cari shadow-sm">Cari Destinasi ✈️</button>
+        </div>
+    </form>
 
-        <button class="btn btn-outline-secondary btn-sm mt-5" style="border-radius: 20px;" onclick="location.reload()">Ulangi & Acak Kata</button>
-    </div>
+    <?php if ($hasil): ?>
+        <div id="hasil" class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="result-card">
+                    <img src="<?php echo $hasil['img']; ?>" alt="<?php echo $hasil['nama']; ?>" class="result-img">
+                    <div class="result-body">
+                        <h2 class="fw-bold text-success mb-3"><?php echo $hasil['nama']; ?></h2>
+                        <p class="fs-5 text-secondary" style="line-height: 1.6;"><?php echo $hasil['desc']; ?></p>
+                        <div class="badge-tips">
+                            💡 <strong>Pro Tips:</strong> <?php echo $hasil['tips']; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 
-    <script>
-        // Kumpulan Variasi Ucapan (Pool Kata-kata Random)
-        const poolSurat1 = [
-            "Hari ini bukan cuma tentang bertambahnya angka, tapi tentang merayakan betapa hebatnya kamu bertahan dan tumbuh sampai detik ini. Dunia beruntung punya orang sehangat kamu.",
-            "Selamat hari menetas! Di hari spesial ini, luangkan waktu sejenak buat berterima kasih sama diri kamu sendiri karena udah berjuang melewati banyak hari-hari yang nggak mudah ya.",
-            "Selamat ulang tahun! Hari ini waktu yang pas buat ngingetin kalau kehadiran kamu di dunia ini membawa banyak arti dan senyuman buat orang-orang di sekitarmu, termasuk aku."
-        ];
+    <footer class="text-center mt-5">
+        <hr class="text-muted">
+        <p class="text-muted small">Tugas Cloud Computing | Dibuat dengan 💻 oleh Peri Yanur</p>
+    </footer>
+</div>
 
-        const poolSurat2 = [
-            "Harapanku nggak muluk-muluk, semoga di babak baru usiamu ini, langkahmu selalu dipermudah, pundakmu dikuatkan, dan hatimu selalu dijaga agar tetap tenang menghadapi apapun.",
-            "Semoga tahun ini membawa lebih banyak tawa daripada air mata, lebih banyak kesempatan baik, dan didekatkan dengan orang-orang tulus yang menghargai keberadaanmu.",
-            "Doa terbaik mengiringi setiap mimpimu. Semoga rasa lelahmu berbuah manis, kesehatan selalu menyertaimu, dan kebahagiaan sederhana selalu datang di waktu yang tepat."
-        ];
-
-        const poolSurat3 = [
-            "Satu hal yang perlu kamu ingat: Kamu berharga, kamu cukup, dan kamu luar biasa dengan caramu sendiri. Jangan pernah ragu sama potensi dirimu. *You totally deserve all the best things!*",
-            "Terima kasih ya sudah tumbuh jadi orang baik. Tetaplah jadi versi terbaik dari dirimu sendiri. Jangan lupa bahagia hari ini, karena hari ini adalah harimu!",
-            "Apapun yang sedang kamu kejar sekarang, semoga semesta mendukungmu. Nikmati prosesnya, jaga kesehatan, dan selamat merayakan hari kelahiran dengan penuh suka cita!"
-        ];
-
-        // Variabel untuk menyimpan teks yang terpilih setelah diacak
-        let suratTerpilih = { 1: "", 2: "", 3: "" };
-
-        function bukaKejutan() {
-            const nama = document.getElementById('namaInput').value.trim();
-            if (nama === "") {
-                alert("Namanya diisi dulu dong, bre! 😅");
-                return;
-            }
-
-            // Set nama ke tampilan
-            document.getElementById('namaTampil').innerText = nama;
-
-            // Proses Pengacakan Teks (Randomizer)
-            suratTerpilih[1] = poolSurat1[Math.floor(Math.random() * poolSurat1.length)];
-            suratTerpilih[2] = poolSurat2[Math.floor(Math.random() * poolSurat2.length)];
-            suratTerpilih[3] = poolSurat3[Math.floor(Math.random() * poolSurat3.length)];
-
-            // Transisi Halaman
-            document.getElementById('formSection').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-
-            // Mainkan Lagu
-            const lagu = document.getElementById('bgMusic');
-            lagu.play().catch(err => console.log("Autoplay dicegah browser, musik jalan setelah interaksi klik."));
-        }
-
-        function bukaSurat(nomorSurat) {
-            const letterBox = document.getElementById('letterBox');
-            
-            // Masukkan teks yang sudah diacak sebelumnya berdasarkan nomor tombol
-            letterBox.innerHTML = suratTerpilih[nomorSurat];
-            
-            // Munculkan kotak surat dengan animasi smooth
-            letterBox.style.display = 'block';
-
-            // Tandai tombol sebagai 'sudah dibuka' (perubahan visual abu-abu)
-            document.getElementById(`btn${nomorSurat}`).classList.add('opened');
-            document.getElementById(`btn${nomorSurat}`).innerHTML = `📂 Surat Ke-${nomorSurat} (Terbuka)`;
-        }
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
